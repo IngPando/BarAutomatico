@@ -42,6 +42,7 @@ boolean Bottle::checkBottleUsage() {
 void Bottle::pour() {
     if (checkBottleUsage()) {
         this->usedCounter++;
+        printf("Pouring %s from bottle %d\n", this->name.c_str(), this->position);
         // eroga la bevanda
     } else {
         // messaggio di errore

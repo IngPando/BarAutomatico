@@ -7,6 +7,8 @@
 class Bottle {
 public:
 
+
+    Bottle() : name(""), position(0), bottleCapacity(0) {}
     Bottle(const String name, int position, int bottleCapacity);
 
     const String getName() const;
