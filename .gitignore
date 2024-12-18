@@ -82,3 +82,6 @@ dkms.conf
 .pio
 
 # End of https://www.toptal.com/developers/gitignore/api/c,c++,platformio
+
+### Visual Studio Code ###
+.vscode
