@@ -1,9 +1,11 @@
 #include "EndStop.h"
 
 
-EndStop::EndStop(int pin) {
+
+EndStop::EndStop(int pin, StepperMotor* stepper) {
     pinMode(pin, INPUT);
     attachInterrupt(digitalPinToInterrupt(pin), EndStop::handleInterrupt, RISING);
+    stepperMotor = stepper;
     instance = this;
 }
 
@@ -11,10 +13,13 @@ bool EndStop::isPressed() {
     return digitalRead(pin) == HIGH;
 }
 
-// Handle the interrupt when the endstop is pressed Stopping instantly the stepper motor
-void EndStop::handleInterrupt(StepperMotor* stepperMotor) {
+
+//When endstop is pressed Stop instantly the stepper motor
+void EndStop::handleInterrupt() {
     if (instance->isPressed()) {
-        stepperMotor->stop();
+        instance->stepperMotor->emergencyStop();
+        instance->stepperMotor->setLastPosition();
     }
 }
+
 

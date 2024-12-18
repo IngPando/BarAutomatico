@@ -6,13 +6,13 @@
 
 class EndStop {
 public:
-    EndStop(int pin);
-    static void handleInterrupt(StepperMotor* stepperMotor);
-    void begin();
+    EndStop(int pin, StepperMotor* stepperMotor);
+    static void handleInterrupt();
     bool isPressed();
 
 private:
     int pin;
+    StepperMotor* stepperMotor;
     static EndStop* instance;
 };
 
