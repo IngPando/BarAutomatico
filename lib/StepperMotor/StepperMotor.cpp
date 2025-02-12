@@ -1,13 +1,18 @@
 #include "StepperMotor.h"
 
+FastAccelStepperEngine stepperEngine = FastAccelStepperEngine();
+FastAccelStepper *motor = NULL;
+
+
 // Initialize the stepper motor ENGINE only to do it once before using the stepper motor
 void StepperMotor::init() {
-    stepperEngine->init();
+    stepperEngine.init();
 }
 
 StepperMotor::StepperMotor(int stepPin, int dirPin){
-    motor = stepperEngine->stepperConnectToPin(stepPin);
+    motor = stepperEngine.stepperConnectToPin(stepPin);
     motor->setDirectionPin(dirPin);
+    motor->setSpeedInHz(10000);
 }
 
 /*
@@ -38,7 +43,13 @@ int StepperMotor::getLastPosition(){
     return lastPosition;
 }
 
+/* move the stepper motor to the desired position in steps */
 void StepperMotor::moveTo(int positionInSteps){
-    motor->move(positionInSteps);
+    motor->runForward();
+}
+
+/* check if the stepper motor is running */
+bool StepperMotor::isRunning(){
+    return motor->isRunning();
 }
 

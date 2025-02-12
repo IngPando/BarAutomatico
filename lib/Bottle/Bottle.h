@@ -19,7 +19,7 @@ public:
 
     boolean checkBottleUsage();       // controlla se la bottiglia può essere ancora usata
 
-    void pour(); // erogazione delle bevanda
+    bool pour(); // erogazione delle bevanda
 
 private:
     String name;    // il nome della bevanda contenuta nella bottiglia

@@ -1,4 +1,8 @@
 #include "DrinkRecipe.h"
+#include "StepperMotor.h"
+
+extern StepperMotor *railwayMotor;
+extern StepperMotor *pourMotorOne;
 
 // costruttore della ricetta
 DrinkRecipe::DrinkRecipe(String name) {
@@ -11,12 +15,12 @@ String DrinkRecipe::getName() {
 }
 
 // aggiunge un ingrediente alla ricetta
-void DrinkRecipe::addIngredient(DrinkIngredient ingredient) {
+void DrinkRecipe::addIngredient(DrinkIngredient *ingredient) {
     // cerca la prima posizione libera e aggiunge l'ingrediente
     for (int i = 0; i < MAX_RECIPE_INGRIDIENTS; i++) {
         // se la quantità è 0 allora l'ingrediente non è stato ancora impostato
         if (recipe[i].amount == 0) {
-            recipe[i] = ingredient;
+            recipe[i] = *ingredient;
             break;
         }
     }
@@ -29,9 +33,26 @@ void DrinkRecipe::doRecipe() {
         if (recipe[i].amount == 0) {
             break;
         }
+        //sposta il bicchiere sotto la bevanda giusta
+        railwayMotor->moveTo(recipe[i].bottle.getPosition());
+
+        /*while(railwayMotor->isRunning()){
+            delay(100);
+        }*/
+
+        
         // eroga la quantità necessaria
         for (int j = 0; j < recipe[i].amount; j++) {
-            recipe[i].bottle.pour();
+            if(recipe[i].bottle.pour()){
+                pourMotorOne->moveTo(POUR_BOTTLE_POSITION);
+                delay(5000);
+                pourMotorOne->moveTo(POUR_BOTTLE_HOME_POSITION);
+            } else {
+                //la bottiglia è finita
+                pourMotorOne->emergencyStop();
+                break;
+            }
+            
         }
     }
 }

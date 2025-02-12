@@ -4,8 +4,6 @@
 #include <Arduino.h>
 #include <FastAccelStepper.h>
 
-FastAccelStepperEngine* stepperEngine = new FastAccelStepperEngine();
-FastAccelStepper *motor = NULL;
 
 class StepperMotor {
     public:
@@ -15,6 +13,7 @@ class StepperMotor {
         void setLastPosition();
         int getLastPosition();
         void moveTo(int positionInSteps);
+        bool isRunning();
     private:
         int lastPosition = 0;
 

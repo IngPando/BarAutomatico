@@ -14,10 +14,11 @@ public:
         amount = 0;
     }
     
-    DrinkIngredient(Bottle b, int a) {
-        bottle = b;
+    DrinkIngredient(Bottle *b, int a) {
+        bottle = *b;
         amount = a;
     }
+    
     Bottle bottle = Bottle("", 0, 0);
     int amount = 0;
 };
@@ -26,7 +27,7 @@ public:
 class DrinkRecipe {
 public:
     DrinkRecipe(String name); 
-    void addIngredient(DrinkIngredient ingredient); // aggiunge un ingrediente alla ricetta
+    void addIngredient(DrinkIngredient *ingredient); // aggiunge un ingrediente alla ricetta
     String getName(); // restituisce il nome della ricetta
     void doRecipe(); // esegue la ricetta
     
