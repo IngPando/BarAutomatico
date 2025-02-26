@@ -13,7 +13,7 @@ public:
 private:
     int pin;
     StepperMotor* stepperMotor;
-    static EndStop* instance;
+    //static EndStop* instance;
 };
 
 #endif // ENDSTOP_H

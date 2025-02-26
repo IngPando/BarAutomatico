@@ -1,18 +1,45 @@
 #include "StepperMotor.h"
 
-FastAccelStepperEngine stepperEngine = FastAccelStepperEngine();
-FastAccelStepper *motor = NULL;
-
-
-// Initialize the stepper motor ENGINE only to do it once before using the stepper motor
-void StepperMotor::init() {
-    stepperEngine.init();
-}
+AccelStepper* motor;
 
 StepperMotor::StepperMotor(int stepPin, int dirPin){
-    motor = stepperEngine.stepperConnectToPin(stepPin);
-    motor->setDirectionPin(dirPin);
-    motor->setSpeedInHz(10000);
+   motor = new AccelStepper(1, stepPin, dirPin);
+
+}
+
+
+bool StepperMotor::isTurningClockwise() {
+    return motor->speed() > 0;
+}
+
+bool StepperMotor::isTurningAnticlockwise() {
+    return motor->speed() < 0;
+}
+
+void StepperMotor::setVelocityVariable(int speed, int maxSpeed, int acceleration){
+    motor->setSpeed(speed);
+    motor->setMaxSpeed(maxSpeed);
+    motor->setAcceleration(acceleration);
+}
+
+void StepperMotor::setSpeed(int speed){
+    motor->setSpeed(speed);
+}
+
+void StepperMotor::setMaxSpeed(int maxSpeed){
+    motor->setMaxSpeed(maxSpeed);
+}
+
+void StepperMotor::setAcceleration(int acceleration){
+    motor->setAcceleration(acceleration);
+}
+
+long StepperMotor::distanceToGo(){
+    return motor->distanceToGo();
+}
+
+bool StepperMotor::run(){
+    return motor->run();
 }
 
 /*
@@ -24,7 +51,8 @@ added. This means, that the stepper can be expected to stop within approx.
 20ms
 */
 void StepperMotor::emergencyStop(){
-    motor->forceStop();
+    motor->stop();
+   
 }
 
 /*
@@ -32,7 +60,11 @@ Set the last position of the stepper motor default to 0
 USE ONLY IN STANDSTILL
 */
 void StepperMotor::setLastPosition(){
-    lastPosition = motor->getCurrentPosition();
+    lastPosition = motor->currentPosition();
+}
+
+void StepperMotor::setHome(){
+    motor->setCurrentPosition(0);
 }
 
 /*
@@ -45,7 +77,9 @@ int StepperMotor::getLastPosition(){
 
 /* move the stepper motor to the desired position in steps */
 void StepperMotor::moveTo(int positionInSteps){
-    motor->runForward();
+    if (motor->distanceToGo() == 0) {
+        motor->moveTo(positionInSteps);
+    } 
 }
 
 /* check if the stepper motor is running */
@@ -53,3 +87,6 @@ bool StepperMotor::isRunning(){
     return motor->isRunning();
 }
 
+long StepperMotor::currentPosition(){
+    return motor->currentPosition();
+}
