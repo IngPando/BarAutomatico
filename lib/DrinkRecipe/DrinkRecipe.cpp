@@ -35,6 +35,7 @@ void DrinkRecipe::doRecipe() {
         }
         //sposta il bicchiere sotto la bevanda giusta
         railwayMotor->moveTo(recipe[i].bottle.getPosition());
+        railwayMotor->run();
 
         /*while(railwayMotor->isRunning()){
             delay(100);

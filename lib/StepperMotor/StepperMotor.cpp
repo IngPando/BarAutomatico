@@ -76,11 +76,20 @@ int StepperMotor::getLastPosition(){
 }
 
 /* move the stepper motor to the desired position in steps */
-void StepperMotor::moveTo(int positionInSteps){
+void StepperMotor::moveTo(long positionInSteps){
     if (motor->distanceToGo() == 0) {
         motor->moveTo(positionInSteps);
     } 
 }
+
+void StepperMotor::runToHome() {
+   motor->moveTo(-10000000);
+}
+
+bool StepperMotor::isHome(){
+    return motor->currentPosition() == RAILWAY_MOTOR_HOME_POSITION;
+}
+
 
 /* check if the stepper motor is running */
 bool StepperMotor::isRunning(){

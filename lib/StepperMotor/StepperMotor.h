@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include <AccelStepper.h>
+#include <Config.h>
 
 
 class StepperMotor {
@@ -11,7 +12,7 @@ class StepperMotor {
         void emergencyStop();
         void setLastPosition();
         int getLastPosition();
-        void moveTo(int positionInSteps);
+        void moveTo(long positionInSteps);
         bool isRunning();
         void setHome();
         long distanceToGo();
@@ -23,6 +24,8 @@ class StepperMotor {
         void setAcceleration(int acceleration);
         bool isTurningClockwise();
         bool isTurningAnticlockwise();
+        void runToHome();
+        bool isHome();
     private:
         int lastPosition = 0;
 

@@ -3,17 +3,16 @@
 
 #include <Arduino.h>
 #include <StepperMotor.h>
+#include "Config.h"
 
 class EndStop {
 public:
     EndStop(int pin, StepperMotor* stepperMotor);
-    static void handleInterrupt();
     bool isPressed();
-
 private:
-    int pin;
-    StepperMotor* stepperMotor;
-    //static EndStop* instance;
+   
+    
+
 };
 
 #endif // ENDSTOP_H
