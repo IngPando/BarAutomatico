@@ -3,6 +3,8 @@
 
 #define ENDSTOP_HOME_PIN 18 //20
 #define ENDSTOP_END_PIN 19  //21
+#define ENDSTOP_POUR_BOTTLE_PIN 3
+#define ENDSTOP_POUR_BOTTLE_HOME_PIN 2
 
 #define BAUDRATE 9600 
 #define NUM_BOTTLES 8   // numero di bottiglie nel dispenser
@@ -20,12 +22,12 @@
 #define POUR_MOTOR_1_DIR_PIN 3
 #define POUR_MOTOR_2_STEP_PIN 17
 #define POUR_MOTOR_2_DIR_PIN 4
-#define POUR_MOTOR_SPEED 200
-#define POUR_MOTOR_MAX_SPEED 1000
-#define POUR_MOTOR_ACCELERATION 100
+#define POUR_MOTOR_SPEED 2000
+#define POUR_MOTOR_MAX_SPEED 2000
+#define POUR_MOTOR_ACCELERATION 2000
 
-#define POUR_BOTTLE_POSITION 1000
-#define POUR_BOTTLE_HOME_POSITION 300
+#define POUR_BOTTLE_POSITION 2000
+#define POUR_BOTTLE_HOME_POSITION -2000
 
 // numero di step per la posizione delle bottiglie nel dispenser
 #define RAILWAY_MOTOR_HOME_POSITION 100

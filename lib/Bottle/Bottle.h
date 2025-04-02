@@ -9,10 +9,10 @@ public:
 
 
     Bottle() : name(""), position(0), bottleCapacity(0) {}
-    Bottle(const String name, int position, int bottleCapacity);
+    Bottle(const String name, long position, int bottleCapacity);
 
     const String getName() const;
-    int getPosition() const;    // restituisce la posizione della bottiglia nel dispenser
+    long getPosition() const;    // restituisce la posizione della bottiglia nel dispenser
     int getUsedCounter(); // restituisce il numero di volte che la bottiglia è stata usata
 
     void setMaxUse();        // imposta il numero massimo di volte che la bottiglia può essere usata
@@ -23,7 +23,7 @@ public:
 
 private:
     String name;    // il nome della bevanda contenuta nella bottiglia
-    int position; // la posizione della bottiglia nel dispenser
+    long position; // la posizione della bottiglia nel dispenser
     int maxUse; // il numero massimo di volte che la bottiglia può essere usata
     int usedCounter = 0; // il numero di volte che la bottiglia è stata usata
     int bottleCapacity; // la capacità della bottiglia in ml

@@ -1,7 +1,7 @@
 #include <Bottle.h>
 #include <Config.h>
 
-Bottle::Bottle(const String name, int position, int bottleCapacity) {
+Bottle::Bottle(const String name, long position, int bottleCapacity) {
     this->name = name;
     this->position = position;
     this->bottleCapacity = bottleCapacity;
@@ -15,7 +15,7 @@ const String Bottle::getName() const {
 }
 
 // restituisce la posizione della bottiglia nel dispenser
-int Bottle::getPosition() const {
+long Bottle::getPosition() const {
     return this->position;
 }
 

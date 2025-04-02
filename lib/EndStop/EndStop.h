@@ -8,6 +8,7 @@
 class EndStop {
 public:
     EndStop(int pin, StepperMotor* stepperMotor);
+    EndStop(int pin, AccelStepper* stepperMotor);
     bool isPressed();
 private:
    
