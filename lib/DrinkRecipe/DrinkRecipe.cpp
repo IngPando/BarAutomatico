@@ -52,27 +52,46 @@ void DrinkRecipe::doRecipe() {
 
         // eroga la quantità necessaria
         Serial.println("Erogo la quantità necessaria");
-        for (int j = 0; j < recipe[i].amount; j++) {
-            if(recipe[i].bottle.pour()){
-                Serial.println("posizione: Erogazione");
-                long pourBottlePosition = POUR_BOTTLE_POSITION;
-                pourMotor->moveTo(pourBottlePosition);
-                
-                    pourMotor->runToPosition();
-                
-                delay(5000);
-                Serial.println("Posizione: Casa");
-                long pourBottleHomePosition = POUR_BOTTLE_HOME_POSITION;
-                pourMotor->moveTo(pourBottleHomePosition);
-                
-                    pourMotor->runToPosition();
-                
-            } else {
-                //la bottiglia è finita
-                //steppers.emergencyStop();
-                break;
-            }
+        // se l'ingrediente è una bottiglia non alcolica allora eroga la quantità specificata per il tempo specificato
+        if (recipe[i].isTimeAmount) {
+            // la quantità è espressa in ms, eroga per il tempo specificato
+            long pourBottlePosition = POUR_BOTTLE_POSITION;
+            pourMotor->moveTo(pourBottlePosition);
             
+                pourMotor->runToPosition();
+            
+            delay(recipe[i].amount); // aspetta il tempo specificato in ms
+            
+            Serial.println("Posizione: Casa");
+            long pourBottleHomePosition = POUR_BOTTLE_HOME_POSITION;
+            pourMotor->moveTo(pourBottleHomePosition);
+            
+                pourMotor->runToPosition();
+            
+        } else
+        {
+            for (int j = 0; j < recipe[i].amount; j++) {
+                if(recipe[i].bottle.pour()){
+                    Serial.println("posizione: Erogazione");
+                    long pourBottlePosition = POUR_BOTTLE_POSITION;
+                    pourMotor->moveTo(pourBottlePosition);
+                    
+                        pourMotor->runToPosition();
+                    
+                    delay(5000);
+                    Serial.println("Posizione: Casa");
+                    long pourBottleHomePosition = POUR_BOTTLE_HOME_POSITION;
+                    pourMotor->moveTo(pourBottleHomePosition);
+                    
+                        pourMotor->runToPosition();
+                    
+                } else {
+                    //la bottiglia è finita
+                    //steppers.emergencyStop();
+                    break;
+                }
+                
+            }
         }
     }
 

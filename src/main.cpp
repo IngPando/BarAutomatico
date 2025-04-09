@@ -70,8 +70,8 @@ void setup() {
   //TESTING RECIPE
   Bottle* gin = new Bottle("Gin", POSITION_1, 1000);
   Bottle* tonic = new Bottle("Tonic", POSITION_5, 1000);
-  DrinkIngredient* ginIngredient = new DrinkIngredient(gin, 1);
-  DrinkIngredient* tonicIngredient = new DrinkIngredient(tonic, 3);
+  DrinkIngredient* ginIngredient = new DrinkIngredient(gin, 1); // ta = false by default = pour 1 time
+  DrinkIngredient* tonicIngredient = new DrinkIngredient(tonic, 5000, true); // ta true = pour for 5000 ms
   ginTonic = new DrinkRecipe("Gin Tonic");
   ginTonic->addIngredient(ginIngredient);
   ginTonic->addIngredient(tonicIngredient);
