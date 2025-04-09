@@ -26,7 +26,7 @@ Button* recipeButton2 = new Button(RECIPE_BUTTON_2_PIN); // Pin 31 for the butto
 Button* recipeButton3 = new Button(RECIPE_BUTTON_3_PIN); // Pin 32 for the button
 Button* recipeButton4 = new Button(RECIPE_BUTTON_4_PIN); // Pin 33 for the button
 Button* recipeButton5 = new Button(RECIPE_BUTTON_5_PIN); // Pin 34 for the button
-Button* recipeButton6 = new Button(RECIPE_BUTTON_6_PIN); // Pin 35 for the button
+Button* emergencyStopButton = new Button(EMERGENCY_BUTTON_PIN); // Pin 35 for the button
 
 // se la macchina non sta preparando una ricetta isWaiting = true
 bool isWaiting = true;
@@ -77,7 +77,6 @@ void setup() {
   ginTonic->addIngredient(tonicIngredient);
   ginTonic->doRecipe(); 
 
-
 }
 
   
@@ -111,9 +110,13 @@ void loop() {
     Serial.println("Recipe Button 5 is Pressed");
   }
   
-  if (recipeButton6->isPressed() && isWaiting) {
+  if (emergencyStopButton->isPressed()) {
     isWaiting = false;
-    Serial.println("Recipe Button 6 is Pressed");
+    Serial.println("EMERCENCY STOP is Pressed");
+    railwayMotor->setHome();
+    railwayMotor->moveTo(RAILWAY_MOTOR_HOME_POSITION);
+    pourMotor->setCurrentPosition(0);
+    pourMotor->moveTo(-1000);
   }
 /*
   
