@@ -5,6 +5,7 @@
 
 extern StepperMotor *railwayMotor;
 extern AccelStepper *pourMotor;
+extern bool isWaiting;
 
 // costruttore della ricetta
 DrinkRecipe::DrinkRecipe(String name) {
@@ -81,4 +82,7 @@ void DrinkRecipe::doRecipe() {
       railwayMotor->run();
       yield();
     }
+
+    //la macchina torna nello stato di "sto aspettando"
+    isWaiting = true;
 }
