@@ -14,13 +14,15 @@ public:
         amount = 0;
     }
     
-    DrinkIngredient(Bottle *b, int a) {
+    DrinkIngredient(Bottle *b, int a, bool ta = false) {
         bottle = *b;
         amount = a;
+        isTimeAmount = ta;
     }
     
     Bottle bottle = Bottle("", 0, 0);
     int amount = 0;
+    bool isTimeAmount = false;
 };
 
 
