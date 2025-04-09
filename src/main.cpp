@@ -6,6 +6,7 @@
 #include <AccelStepper.h>
 #include <EndStop.h>
 #include <MultiStepper.h>
+#include <Button.h>
 
 StepperMotor* railwayMotor = new StepperMotor(RAILWAY_MOTOR_STEP_PIN,RAILWAY_MOTOR_DIR_PIN);
 AccelStepper* pourMotor = new AccelStepper(AccelStepper::DRIVER,POUR_MOTOR_2_STEP_PIN,POUR_MOTOR_2_DIR_PIN);
@@ -20,6 +21,15 @@ DrinkRecipe* ginTonic;
 
 MultiStepper steppers;
 
+Button* recipeButton1 = new Button(RECIPE_BUTTON_1_PIN); // Pin 30 for the button
+Button* recipeButton2 = new Button(RECIPE_BUTTON_2_PIN); // Pin 31 for the button
+Button* recipeButton3 = new Button(RECIPE_BUTTON_3_PIN); // Pin 32 for the button
+Button* recipeButton4 = new Button(RECIPE_BUTTON_4_PIN); // Pin 33 for the button
+Button* recipeButton5 = new Button(RECIPE_BUTTON_5_PIN); // Pin 34 for the button
+Button* recipeButton6 = new Button(RECIPE_BUTTON_6_PIN); // Pin 35 for the button
+
+// se la macchina non sta preparando una ricetta isWaiting = true
+bool isWaiting = true;
 
 void setup() {
   Serial.begin(9600);
@@ -74,6 +84,37 @@ void setup() {
 
 
 void loop() {
+
+  if (recipeButton1->isPressed() && isWaiting) {
+      Serial.println("Recipe Button 1 is Pressed");
+      isWaiting = false;
+      ginTonic->doRecipe();
+  }
+
+  if (recipeButton2->isPressed() && isWaiting) {
+      isWaiting = false;
+      Serial.println("Recipe Button 2 is Pressed!");
+  }
+
+  if (recipeButton3->isPressed() && isWaiting) {
+    isWaiting = false;
+    Serial.println("Recipe Button 3 is Pressed");
+  }
+
+  if (recipeButton4->isPressed() && isWaiting) {
+    isWaiting = false;
+    Serial.println("Recipe Button 4 is Pressed");
+  }
+
+  if (recipeButton5->isPressed() && isWaiting) {
+    isWaiting = false;
+    Serial.println("Recipe Button 5 is Pressed");
+  }
+  
+  if (recipeButton6->isPressed() && isWaiting) {
+    isWaiting = false;
+    Serial.println("Recipe Button 6 is Pressed");
+  }
 /*
   
   if (railwayMotor->isHome())
@@ -171,4 +212,6 @@ void loop() {
     railwayMotor->run();
 
     */
+   
+    
   }

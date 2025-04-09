@@ -19,7 +19,7 @@
 
 
 #define POUR_MOTOR_1_STEP_PIN 16 
-#define POUR_MOTOR_1_DIR_PIN 3
+#define POUR_MOTOR_1_DIR_PIN 3 
 #define POUR_MOTOR_2_STEP_PIN 17
 #define POUR_MOTOR_2_DIR_PIN 4
 #define POUR_MOTOR_SPEED 2000
@@ -40,5 +40,15 @@
 #define POSITION_7 68725
 #define POSITION_8 78225
 #define POSITION_9 87725
+
+//bottoni per eseguire le ricette
+#define RECIPE_BUTTON_1_PIN 30
+#define RECIPE_BUTTON_2_PIN 31
+#define RECIPE_BUTTON_3_PIN 32
+#define RECIPE_BUTTON_4_PIN 33
+#define RECIPE_BUTTON_5_PIN 34
+#define RECIPE_BUTTON_6_PIN 35
+
+
 
 #endif
