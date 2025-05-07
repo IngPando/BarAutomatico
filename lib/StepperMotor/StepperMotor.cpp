@@ -77,13 +77,14 @@ int StepperMotor::getLastPosition(){
 
 /* move the stepper motor to the desired position in steps */
 void StepperMotor::moveTo(long positionInSteps){
-    if (motor->distanceToGo() == 0) {
         motor->moveTo(positionInSteps);
-    } 
+        Serial.print("Moving to position: ");
+        Serial.println(positionInSteps);
 }
 
 void StepperMotor::runToHome() {
    motor->moveTo(-10000000);
+   Serial.println("Moving to home position...");
 }
 
 bool StepperMotor::isHome(){

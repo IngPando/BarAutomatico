@@ -31,13 +31,21 @@ void DrinkRecipe::addIngredient(DrinkIngredient *ingredient) {
 
 void DrinkRecipe::doRecipe() {
 
+
+    Serial.print("Posizione Attuale: ");
+    Serial.println(railwayMotor->currentPosition());
     railwayMotor->runToHome();
+    Serial.print("destinazione: ");
+    Serial.println(railwayMotor->distanceToGo());
+
     while (!railwayMotor->isHome())
-    {
+    {    
         railwayMotor->run();
         yield();
     }
-    delay(5000);
+
+    Serial.print("destinazione dopo il while: ");
+    Serial.println(railwayMotor->distanceToGo());
     // per ogni ingrediente della ricetta
     Serial.println("Ricetta: ");
     Serial.println(this->name);
@@ -52,6 +60,8 @@ void DrinkRecipe::doRecipe() {
         railwayMotor->moveTo(recipe[i].bottle.getPosition());
         Serial.println("Sposto bicchiere sotto la bevanda");
         Serial.println(recipe[i].bottle.getPosition());
+        Serial.println("destinazione della recipe[" + String(i) + "]: ");
+        Serial.println(railwayMotor->distanceToGo());
         // aspetta che il motore sia fermo
         while (railwayMotor->isRunning() && railwayMotor->currentPosition() != recipe[i].bottle.getPosition()) {
             railwayMotor->run();
@@ -103,7 +113,7 @@ void DrinkRecipe::doRecipe() {
         }
     }
 
-    railwayMotor->runToHome();
+    railwayMotor->moveTo(RAILWAY_MOTOR_HOME_POSITION);
     while (!railwayMotor->isHome())
     {
       railwayMotor->run();

@@ -18,6 +18,7 @@ EndStop* endStopPourBottle;
 EndStop* endStopPourBottleHome;
 
 DrinkRecipe* ginTonic;
+DrinkRecipe* testRecipe; //TESTING RECIPE
 
 MultiStepper steppers;
 
@@ -55,15 +56,15 @@ void setup() {
   endStopPourBottleHome = new EndStop(ENDSTOP_POUR_BOTTLE_HOME_PIN, pourMotor);
 
   
-
- /* railwayMotor->runToHome();
+// RUN TO HOME ON FIRST START
+  railwayMotor->runToHome();
   while (!railwayMotor->isHome())
   {
     railwayMotor->run();
     yield();
   }
   
-  delay(5000); */
+  delay(5000); 
 
   //TESTING RECIPE
   Bottle* gin = new Bottle("Gin", POSITION_1, 1000);
@@ -74,6 +75,10 @@ void setup() {
   ginTonic->addIngredient(ginIngredient);
   ginTonic->addIngredient(tonicIngredient);
  // ginTonic->doRecipe(); 
+
+testRecipe = new DrinkRecipe("Test Recipe");
+  testRecipe->addIngredient(ginIngredient);
+
 
 }
 
