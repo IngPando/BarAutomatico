@@ -56,16 +56,14 @@ void setup() {
 
   
 
-  railwayMotor->runToHome();
-  //.addStepper(pourMotorOne);
-  //steppers.addStepper(pourMotorTwo);
+ /* railwayMotor->runToHome();
   while (!railwayMotor->isHome())
   {
     railwayMotor->run();
     yield();
   }
   
-  delay(5000);
+  delay(5000); */
 
   //TESTING RECIPE
   Bottle* gin = new Bottle("Gin", POSITION_1, 1000);
@@ -75,7 +73,7 @@ void setup() {
   ginTonic = new DrinkRecipe("Gin Tonic");
   ginTonic->addIngredient(ginIngredient);
   ginTonic->addIngredient(tonicIngredient);
-  ginTonic->doRecipe(); 
+ // ginTonic->doRecipe(); 
 
 }
 

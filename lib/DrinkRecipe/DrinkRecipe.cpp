@@ -30,6 +30,14 @@ void DrinkRecipe::addIngredient(DrinkIngredient *ingredient) {
 }
 
 void DrinkRecipe::doRecipe() {
+
+    railwayMotor->runToHome();
+    while (!railwayMotor->isHome())
+    {
+        railwayMotor->run();
+        yield();
+    }
+    delay(5000);
     // per ogni ingrediente della ricetta
     Serial.println("Ricetta: ");
     Serial.println(this->name);
