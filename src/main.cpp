@@ -10,8 +10,7 @@
 
 StepperMotor* railwayMotor = new StepperMotor(RAILWAY_MOTOR_STEP_PIN,RAILWAY_MOTOR_DIR_PIN);
 AccelStepper* pourMotor = new AccelStepper(AccelStepper::DRIVER,POUR_MOTOR_2_STEP_PIN,POUR_MOTOR_2_DIR_PIN);
-//AccelStepper pourMotorOne (AccelStepper::DRIVER,POUR_MOTOR_1_STEP_PIN,POUR_MOTOR_1_DIR_PIN);
-//AccelStepper pourMotorTwo (AccelStepper::DRIVER,POUR_MOTOR_2_STEP_PIN,POUR_MOTOR_2_DIR_PIN);
+
 EndStop* endStopHome;
 EndStop* endStopEnd;
 EndStop* endStopPourBottle;
@@ -36,19 +35,11 @@ void setup() {
   Serial.begin(9600);
 
   railwayMotor -> setVelocityVariable(RAILWAY_MOTOR_SPEED, RAILWAY_MOTOR_MAX_SPEED, RAILWAY_MOTOR_ACCELERATION);
-
   
   pourMotor->setSpeed(POUR_MOTOR_SPEED);
   pourMotor->setMaxSpeed(POUR_MOTOR_MAX_SPEED);
   pourMotor->setAcceleration(POUR_MOTOR_ACCELERATION);
-// if Accel Stepper
- /* pourMotorOne.setSpeed(POUR_MOTOR_SPEED);
-  pourMotorTwo.setSpeed(POUR_MOTOR_SPEED);
-  pourMotorOne.setMaxSpeed(POUR_MOTOR_MAX_SPEED);
-  pourMotorTwo.setMaxSpeed(POUR_MOTOR_MAX_SPEED);
-  pourMotorOne.setAcceleration(POUR_MOTOR_ACCELERATION);
-  pourMotorTwo.setAcceleration(POUR_MOTOR_ACCELERATION);
-*/
+
 
   endStopHome = new EndStop(ENDSTOP_HOME_PIN, railwayMotor);
   endStopEnd = new EndStop(ENDSTOP_END_PIN, railwayMotor);
@@ -66,7 +57,7 @@ void setup() {
   
   delay(5000); 
 
-  //TESTING RECIPE
+  //GIN TONIC RECIPE
   Bottle* gin = new Bottle("Gin", POSITION_1, 1000);
   Bottle* tonic = new Bottle("Tonic", POSITION_5, 1000);
   DrinkIngredient* ginIngredient = new DrinkIngredient(gin, 1); // ta = false by default = pour 1 time
@@ -74,9 +65,10 @@ void setup() {
   ginTonic = new DrinkRecipe("Gin Tonic");
   ginTonic->addIngredient(ginIngredient);
   ginTonic->addIngredient(tonicIngredient);
- // ginTonic->doRecipe(); 
 
-testRecipe = new DrinkRecipe("Test Recipe");
+
+ // TESTING RECIPE
+  testRecipe = new DrinkRecipe("Test Recipe");
   testRecipe->addIngredient(ginIngredient);
 
 

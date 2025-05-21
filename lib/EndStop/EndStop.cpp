@@ -63,19 +63,7 @@ EndStop::EndStop(int pin, StepperMotor* stepper) {
         Serial.println("End endstop attached"); 
         break;
     }
-    /*if (_pin == ENDSTOP_HOME_PIN)
-    {
-        attachInterrupt(digitalPinToInterrupt(_pin), handleInterrupt, RISING);
-        Serial.println("Home endstop attached");
-    } else {
-        if (_pin == ENDSTOP_END_PIN)
-        {
-            attachInterrupt(digitalPinToInterrupt(_pin), handleInterruptEnd, RISING);
-            Serial.println("End endstop attached"); 
-        }
-        
-    }*/
-   
+    
     stepperMotor = stepper;
     
 }
