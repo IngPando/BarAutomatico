@@ -1,15 +1,15 @@
 #ifndef __CONFIG__
 #define __CONFIG__
 
-#define ENDSTOP_HOME_PIN 18 //20
-#define ENDSTOP_END_PIN 19  //21
-#define ENDSTOP_POUR_BOTTLE_PIN 3
+#define ENDSTOP_HOME_PIN 18 
+#define ENDSTOP_END_PIN 3  //19
+#define ENDSTOP_POUR_BOTTLE_PIN 19 //3
 #define ENDSTOP_POUR_BOTTLE_HOME_PIN 2
 
 #define BAUDRATE 9600 
 #define NUM_BOTTLES 8   // numero di bottiglie nel dispenser
 #define MEASURING_CAP_CAPACITY 30 // ml del dosatore per la misurazione della capacità delle bottiglie
-#define MAX_RECIPE_INGRIDIENTS 2 // numero massimo di ingredienti per ricetta
+#define MAX_RECIPE_INGRIDIENTS 5 // numero massimo di ingredienti per ricetta
 
 #define RAILWAY_MOTOR_STEP_PIN 9
 #define RAILWAY_MOTOR_DIR_PIN 8

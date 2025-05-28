@@ -17,7 +17,12 @@ EndStop* endStopPourBottle;
 EndStop* endStopPourBottleHome;
 
 DrinkRecipe* ginTonic;
-DrinkRecipe* testRecipe; //TESTING RECIPE
+DrinkRecipe* vodkaTonic;
+DrinkRecipe* americano;
+DrinkRecipe* negroni;
+DrinkRecipe* spritz;
+DrinkRecipe* spritzCampari;
+
 
 MultiStepper steppers;
 
@@ -57,20 +62,62 @@ void setup() {
   
   delay(5000); 
 
-  //GIN TONIC RECIPE
+  //BOTTLE
   Bottle* gin = new Bottle("Gin", POSITION_1, 1000);
+  Bottle* vodka = new Bottle("Vodka", POSITION_2, 1000);
+  Bottle* campari = new Bottle("name3",POSITION_3,1000);
+  Bottle* vermout = new Bottle("name4",POSITION_4,1000);
   Bottle* tonic = new Bottle("Tonic", POSITION_5, 1000);
+  Bottle* aperol = new Bottle("Aperol", POSITION_6, 1000);
+  Bottle* prosecco = new Bottle("Prosecco",POSITION_7,1000);
+  Bottle* eight = new Bottle("name8",POSITION_8,1000);
+
+  // DRINK INGREDIENT
   DrinkIngredient* ginIngredient = new DrinkIngredient(gin, 1); // ta = false by default = pour 1 time
   DrinkIngredient* tonicIngredient = new DrinkIngredient(tonic, 5000, true); // ta true = pour for 5000 ms
+  DrinkIngredient* tonicIngredientHalf = new DrinkIngredient(tonic, 2500, true);
+  DrinkIngredient* vodkaIngredient = new DrinkIngredient(vodka, 1);
+  DrinkIngredient* campariIngredient = new DrinkIngredient(campari,1);
+  DrinkIngredient* campariIngredientDouble = new DrinkIngredient(campari, 2);
+  DrinkIngredient* vermoutIngredient = new DrinkIngredient(vermout,1);
+  DrinkIngredient* aperolIngredient = new DrinkIngredient(aperol,2);
+  DrinkIngredient* proseccoIngredient = new DrinkIngredient(prosecco, 1);
+
+
+  //GIN TONIC RECIPE
   ginTonic = new DrinkRecipe("Gin Tonic");
-  ginTonic->addIngredient(ginIngredient);
+  ginTonic->addIngredient(ginIngredient); 
   ginTonic->addIngredient(tonicIngredient);
 
+  // VODKA TONIC RECIPE
+  vodkaTonic = new DrinkRecipe("Vodka Tonic");
+  vodkaTonic->addIngredient(vodkaIngredient);
+  vodkaTonic->addIngredient(tonicIngredient);
 
- // TESTING RECIPE
-  testRecipe = new DrinkRecipe("Test Recipe");
-  testRecipe->addIngredient(ginIngredient);
+  // AMERICANO RECIPE
+  americano = new DrinkRecipe("Americano");
+  americano->addIngredient(campariIngredient);
+  americano->addIngredient(vermoutIngredient);
+  americano->addIngredient(tonicIngredient);
 
+  // NEGRONI RECIPE
+  negroni = new DrinkRecipe("Negroni");
+  negroni->addIngredient(campariIngredient);
+  negroni->addIngredient(vermoutIngredient);
+  negroni->addIngredient(ginIngredient);
+
+
+  // SPRITZ APEROL RECIPE
+  spritz = new DrinkRecipe("Spritz Aperol");
+  spritz->addIngredient(aperolIngredient);
+  spritz->addIngredient(proseccoIngredient);
+  spritz->addIngredient(tonicIngredientHalf);
+
+  // SPRITZ CAMPARI RECIPE
+  spritzCampari = new DrinkRecipe("Spritz Aperol");
+  spritzCampari->addIngredient(campariIngredientDouble);
+  spritzCampari->addIngredient(proseccoIngredient);
+  spritzCampari->addIngredient(tonicIngredientHalf);
 
 }
 
@@ -86,18 +133,21 @@ void loop() {
   }
 
   if (recipeButton2->isPressed() && isWaiting) {
-      isWaiting = false;
       Serial.println("Recipe Button 2 is Pressed!");
+      isWaiting = false;
+      vodkaTonic->doRecipe();
   }
 
   if (recipeButton3->isPressed() && isWaiting) {
-    isWaiting = false;
     Serial.println("Recipe Button 3 is Pressed");
+    isWaiting = false;
+    americano->doRecipe();
   }
 
   if (recipeButton4->isPressed() && isWaiting) {
-    isWaiting = false;
     Serial.println("Recipe Button 4 is Pressed");
+    isWaiting = false;
+    negroni->doRecipe();
   }
 
   if (recipeButton5->isPressed() && isWaiting) {
@@ -113,6 +163,5 @@ void loop() {
     pourMotor->setCurrentPosition(0);
     pourMotor->moveTo(-1000);
   }
-
     
   }
